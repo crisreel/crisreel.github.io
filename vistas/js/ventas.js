@@ -790,13 +790,26 @@ $(".tablas").on("click", ".btnImprimirFactura", function(){
 IMPRIMIR Ticket
 =============================================*/
 
-$(".tablas").on("click", ".btnImprimirTicket", function(){
+$(document).ready(function() {
+    // Asignar el controlador de eventos al botón de imprimir factura
+    $(".tablas").on("click", ".btnImprimirTicket", function() {
+        // Abrir un cuadro de diálogo para ingresar texto
+        var texto = prompt("Ingrese el texto para la observación en la factura:");
 
-	var codigoVenta = $(this).attr("codigoVenta");
+        // Verificar si se ingresó texto
+        if (texto !== null) {
+            // Actualizar el contenido de la observación en el bloque 5
+            var nuevoContenido = 'Observación: ' + texto;
+            $(".observacionFactura").html(nuevoContenido);
+            // Mostrar mensaje de éxito
+            alert("Observación actualizada correctamente en la factura.");
+        } else {
+            // Mostrar un mensaje indicando que no se ingresó texto
+            alert("No se ingresó ninguna observación. El texto de observación en la factura no se actualizará.");
+        }
+    });
+});
 
-	window.open("extensiones/tcpdf/pdf/ticket.php?codigo="+codigoVenta, "_blank"); 
-
-})
 
 /*=============================================
 RANGO DE FECHAS
